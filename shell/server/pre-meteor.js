@@ -375,7 +375,11 @@ Meteor.startup(function () {
     WebApp.rawConnectHandlers.use(BlackrockPayments.makeConnectHandler(globalDb));
   }
 
-  WebApp.rawConnectHandlers.use(function (req, res, next) {
+  var serveMeteorOrStaticPublishing = function(req, res, next) {
+    return dispatchToMeteorOrStaticPublishing(req, res, next);
+  };
+
+  var dispatchToMeteorOrStaticPublishing = function(req, res, next) {
     var hostname = req.headers.host.split(":")[0];
     if (isSandstormShell(hostname)) {
       // Go on to Meteor.
@@ -443,7 +447,9 @@ Meteor.startup(function () {
     }).catch(function (err) {
       writeErrorResponse(res, err);
     });
-  });
+  };
+
+  WebApp.rawConnectHandlers.use(serveMeteorOrStaticPublishing);
 });
 
 var errorTxtMapping = {};
