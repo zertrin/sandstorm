@@ -55,7 +55,7 @@ limitations under the License.
 
   {{!-- standard topbar items --}}
   {{#if currentUser}}
-    {{#sandstormTopbarItem name="toggle-navbar" topbar=globalTopbar}}
+    {{#sandstormTopbarItem name="toggle-navbar" topbar=globalTopbar priority=0}}
       <button class="toggle-navbar-button">Sandstorm</button>
       {{/sandstormTopbarItem}}
   {{else}}
@@ -66,10 +66,10 @@ limitations under the License.
       <div class="toggle-navbar-button">Sandstorm</div>
       {{/sandstormTopbarItem}}
   {{/if}}
-  {{>sandstormTopbarItem name="account" topbar=globalTopbar data=globalAccountsUi
+  {{>sandstormTopbarItem name="account" topbar=globalTopbar data=globalAccountsUi priority=61
                          template="loginButtons" popupTemplate="loginButtonsPopup"}}
   {{#if currentUser}}
-    {{>sandstormTopbarItem name="notifications" topbar=globalTopbar
+    {{>sandstormTopbarItem name="notifications" topbar=globalTopbar priority=60
                            template="notifications" popupTemplate="notificationsPopup"}}
   {{/if}}
   {{!-- admin alerts --}}
@@ -210,7 +210,7 @@ limitations under the License.
 </template>
 
 <template name="title">
-  {{#sandstormTopbarItem name="title" priority=5 topbar=globalTopbar}}{{.}}{{/sandstormTopbarItem}}
+  {{#sandstormTopbarItem name="title" priority=10 topbar=globalTopbar}}{{.}}{{/sandstormTopbarItem}}
 </template>
 
 <template name="loading">
@@ -541,7 +541,7 @@ limitations under the License.
 
 <template name="grain">
   {{>sandstormTopbarItem name="title" priority=5 topbar=globalTopbar template="grainTitle"}}
-  {{#sandstormTopbarItem name="grain-size" priority=5 topbar=globalTopbar}}
+  {{#sandstormTopbarItem name="grain-size" priority=11 topbar=globalTopbar}}
     {{grainSize}}
   {{/sandstormTopbarItem}}
 
@@ -551,29 +551,29 @@ limitations under the License.
 
   {{#if currentUser}}
     {{>sandstormTopbarItem name="share" topbar=globalTopbar
-          template="grainShareButton" popupTemplate="grainSharePopup"}}
-    {{>sandstormTopbarItem name="delete" topbar=globalTopbar template="grainDeleteButton"}}
+          template="grainShareButton" popupTemplate="grainSharePopup" priority=12}}
+    {{>sandstormTopbarItem name="delete" topbar=globalTopbar template="grainDeleteButton" priority=30}}
   {{/if}}
   {{#if isOwner}}
-    {{>sandstormTopbarItem name="debug-log" topbar=globalTopbar template="grainDebugLogButton" data=globalTopbar}}
-    {{>sandstormTopbarItem name="backup" topbar=globalTopbar template="grainBackupButton" data=globalTopbar}}
-    {{>sandstormTopbarItem name="restart" topbar=globalTopbar template="grainRestartButton" data=globalTopbar}}
+    {{>sandstormTopbarItem name="debug-log" topbar=globalTopbar template="grainDebugLogButton" data=globalTopbar priority=31}}
+    {{>sandstormTopbarItem name="backup" topbar=globalTopbar template="grainBackupButton" data=globalTopbar priority=32}}
+    {{>sandstormTopbarItem name="restart" topbar=globalTopbar template="grainRestartButton" data=globalTopbar priority=33}}
   {{/if}}
   {{#if displayWebkeyButton}}
     {{>sandstormTopbarItem name="webkey" topbar=globalTopbar
-        template="grainApiTokenButton" popupTemplate="grainApiTokenPopup"}}
+        template="grainApiTokenButton" popupTemplate="grainApiTokenPopup" priority=34}}
   {{/if}}
   {{#if showPowerboxRequest}}
     {{>sandstormTopbarItem name="request" topbar=globalTopbar template="grainPowerboxRequest"
-        startOpen=true popupTemplate="grainPowerboxRequestPopup"}}
+        startOpen=true popupTemplate="grainPowerboxRequestPopup" priority=35}}
   {{/if}}
   {{#if showPowerboxOffer}}
     {{>sandstormTopbarItem name="offer" topbar=globalTopbar template="grainPowerboxOffer"
-        startOpen=true popupTemplate="grainPowerboxOfferPopup"}}
+        startOpen=true popupTemplate="grainPowerboxOfferPopup" priority=36}}
   {{/if}}
 
   {{>sandstormTopbarItem name="identity" topbar=globalTopbar
-                         template="grainIdentity" popupTemplate="grainIdentityPopup"}}
+                         template="grainIdentity" popupTemplate="grainIdentityPopup" priority=37}}
 
 </template>
 
