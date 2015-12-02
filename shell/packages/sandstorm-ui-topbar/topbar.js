@@ -214,7 +214,7 @@ Template.sandstormTopbar.events({
 
   "click .toggle-navbar": function (event) {
     var topbar = Template.instance().data;
-    topbar._showNavbar.set(!topbar._showNavbar.get());
+    topbar._shrinkNavbar.set(!topbar._shrinkNavbar.get());
   },
 
   "click .menu-button": function (event) {
@@ -224,7 +224,7 @@ Template.sandstormTopbar.events({
 
   "click .navbar-shrink": function (event) {
     var topbar = Template.instance().data;
-    topbar._showNavbar.set(!topbar._showNavbar.get());
+    topbar._shrinkNavbar.set(!topbar._shrinkNavbar.get());
   },
 
   "click .navbar .close-button": function (event) {
@@ -314,7 +314,7 @@ Template.sandstormTopbarItem.onDestroyed(function () {
 // =======================================================================================
 // Public interface
 
-SandstormTopbar = function (db, expandedVar, grainsVar, showNavbarVar) {
+SandstormTopbar = function (db, expandedVar, grainsVar, shrinkNavbarVar) {
   // `expandedVar` is an optional object that behaves like a `ReactiveVar` and will be used to
   // track which popup is currently open. (The caller may wish to back this with a Session
   // variable.)
@@ -325,12 +325,12 @@ SandstormTopbar = function (db, expandedVar, grainsVar, showNavbarVar) {
 
   this._expanded = expandedVar || new ReactiveVar(null);
   this._menuExpanded = new ReactiveVar(false);
-  // showNavbar is different from menuExpanded:
+  // shrinkNavbar is different from menuExpanded:
   //  - on desktop, we want to show the navbar by default,
-  //    and toggle if the user clicks the logo
+  //    and toggle shrinking it if the user clicks the logo
   //  - on mobile, we wish to hide the menu by default,
   //    and show it when the user clicks the menu button
-  this._showNavbar = showNavbarVar || new ReactiveVar(true);
+  this._shrinkNavbar = shrinkNavbarVar || new ReactiveVar(true);
   this._grains = grainsVar || new ReactiveVar([]);
 
 }
